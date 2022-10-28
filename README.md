@@ -60,6 +60,30 @@ sh ./ejecutar-mysql.sh
 
 La contraseña para el usuario `root` es `secret`.
 
+## Ejecutando un script de SQL
+
+El contenedor carga una carpeta `/sql` que es compartida con el entorno de desarrollo: Los archivos que están en la carpeta `sql` del proyecto se pueden ver en el contenedor en la carpeta `/sql`.
+
+- Es posible crear y modificar archivos en la carpeta `sql` en el entorno de desarrollo
+- Es posible ejecutar estos archivos en MySQL usando `source /sql/<nombre-archivo>.sql`
+
+Por ejemplo, suponga que crea un archivo en `sql/listado-empleados.sql`
+
+```
+USE employees;
+
+SELECT * 
+  FROM employees
+  LIMIT 10;
+```
+
+Es posible ejecutar el script iniciando MySQL en el contenedor (p.ej., usando `./ejecutar-mysql.sh`) y ejecutando el siguiente comando
+
+```
+source /sql/listado-empleados.sql
+```
+
+
 ## Detener y eliminar el contenedor
 
 Es posible usar `detener-contenedor` para detener y eliminar el contenedor.
